@@ -1,0 +1,40 @@
+void merge(int arr[], int l, int mid, int r){
+    int left_len = mid - l + 1, right_len = r - (mid + 1) + 1;
+    int left[left_len], right[right_len];
+    for(int i = 0 ; i < left_len ; i++){
+        left[i] = arr[l + i];
+    }
+    for(int i = 0 ; i < right_len ; i++){
+        right[i] = arr[mid + 1 + i];
+    }
+    int i = 0, j = 0, k = l;
+    while(i < left_len && j < right_len){
+        if(left[i] <= right[j]){
+            arr[k] = left[i];
+            i++;
+        }
+        else{
+            arr[k] = right[j];
+            j++;
+        }
+        k++;
+    }
+    while(i < left_len){
+        arr[k] = left[i];
+        k++; i++;
+    }
+    while(j < right_len){
+        arr[k] = right[j];
+        k++; j++;
+    }
+}
+
+void mergeSort(int arr[], int l, int r) {
+    // Write Your Code Here
+    if(l < r){
+        int mid = l + (r - l)/2;
+        mergeSort(arr, l, mid);
+        mergeSort(arr, mid + 1, r);
+        merge(arr, l, mid, r);
+    }
+}

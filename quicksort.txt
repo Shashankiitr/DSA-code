@@ -1,0 +1,19 @@
+int partitionArray(int input[], int start, int end) {
+	int pivot = input[end];
+	int j = start;
+	for(int i = start ; i <= end ; i++){
+		if(input[i] < pivot){
+			swap(input[i], input[j]); j++;
+		}
+	}
+	swap(input[j], input[end]);
+	return j;
+}
+
+void quickSort(int input[], int start, int end) {
+	if(start < end){
+		int pivot_index = partitionArray(input, start, end);
+		quickSort(input, start, pivot_index - 1);
+		quickSort(input, pivot_index + 1, end);
+	}
+}
